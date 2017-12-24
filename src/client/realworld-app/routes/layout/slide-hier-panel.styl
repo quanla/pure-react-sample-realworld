@@ -1,0 +1,55 @@
+.slide-hier-panel {
+  height 100%;
+
+  .panels-container {
+    height 100%;
+    overflow hidden;
+    position relative;
+
+    & > div {
+      position: absolute !important;
+      top: 0;
+      width 100%;
+      height 100%;
+    }
+
+    &.right {
+      .slide-enter {
+        left: 110%;
+        transition: left 300ms;
+      }
+
+      .slide-enter.slide-enter-active {
+        left: 0;
+      }
+
+      .slide-exit {
+        left: 0;
+        transition: left 300ms;
+      }
+
+      .slide-exit.slide-exit-active {
+        left: -110%;
+      }
+    }
+    &.left {
+      .slide-enter {
+        left: -110%;
+        transition: left 300ms;
+      }
+
+      .slide-enter.slide-enter-active {
+        left: 0;
+      }
+
+      .slide-exit {
+        left: 0;
+        transition: left 300ms;
+      }
+
+      .slide-exit.slide-exit-active {
+        left: 110%;
+      }
+    }
+  }
+}
