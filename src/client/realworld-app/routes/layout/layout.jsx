@@ -3,6 +3,7 @@ import {RComponent} from "../../../common/r-component";
 import {Fragment} from "react";
 import {Link} from "react-router-dom";
 import {userInfo} from "../../authen/user-info";
+import {WindowTitle} from "./window-title";
 
 export class Layout extends RComponent {
 
@@ -17,37 +18,50 @@ export class Layout extends RComponent {
     }
 
     render() {
-        const {children} = this.props;
+        const {children, history, windowTitle} = this.props;
+
+        const renderNavItem = (label, location) => (
+            <li className="nav-item">
+                {/* Add "active" class when you're on that page" */}
+                <Link
+                    className={classnames("nav-link", {
+                        active: location == history.location.pathname
+                    })}
+                    to={location}
+                >
+                    {label}
+                </Link>
+            </li>
+        );
 
         return (
-            <div className="">
+            <Fragment>
+
+                <WindowTitle title={windowTitle == null ? "Conduit" : `${windowTitle} — Conduit`}/>
+
                 <nav className="navbar navbar-light">
                     <div className="container">
                         <Link className="navbar-brand" to="/">conduit</Link>
                         <ul className="nav navbar-nav pull-xs-right">
-                            <li className="nav-item">
-                                {/* Add "active" class when you're on that page" */}
-                                <a className="nav-link active" href="">Home</a>
-                            </li>
+                            {renderNavItem("Home", "/")}
 
                             {userInfo.getUser() == null ? (
                                 <Fragment>
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="">Sign up</a>
-                                    </li>
+                                    {renderNavItem("Sign up", "/register")}
                                 </Fragment>
                             ) : (
                                 <Fragment>
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="">
-                                            <i className="ion-compose"></i>&nbsp;New Post
-                                        </a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="">
+                                    {renderNavItem((
+                                        <Fragment>
+                                            <i className="ion-compose"></i>&nbsp;New Article
+                                        </Fragment>
+                                    ), "/editor")}
+
+                                    {renderNavItem((
+                                        <Fragment>
                                             <i className="ion-gear-a"></i>&nbsp;Settings
-                                        </a>
-                                    </li>
+                                        </Fragment>
+                                    ), "/settings")}
                                 </Fragment>
                             )}
                         </ul>
@@ -64,7 +78,7 @@ export class Layout extends RComponent {
                         {/*</span>*/}
                     {/*</div>*/}
                 {/*</footer>*/}
-            </div>
+            </Fragment>
         );
     }
 }

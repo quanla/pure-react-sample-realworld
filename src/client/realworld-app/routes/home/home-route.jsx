@@ -27,6 +27,7 @@ export class HomeRoute extends RComponent {
         return (
             <Layout
                 className="home-route"
+                windowTitle="Home"
                 history={history}
             >
                 <div className="home-page">
