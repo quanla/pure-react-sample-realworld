@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import {RComponent} from "../../../common/r-component";
 import {TabsPanel} from "./tabs-panel";
-import {FeedList} from "./feed-list";
+import {PagingArticleList} from "./paging-article-list";
 import {articleApi} from "../../../api/article-api";
 import {userInfo} from "../../authen/user-info";
 
@@ -24,8 +24,8 @@ export class FeedsPanel extends RComponent {
                         {
                             tabLabel: "Your Feed",
                             render: () => (
-                                <FeedList
-                                    api={() => articleApi.getMyFeedList()}
+                                <PagingArticleList
+                                    api={(page) => articleApi.getMyFeedList(page)}
                                 />
                             )
                         }
@@ -34,8 +34,8 @@ export class FeedsPanel extends RComponent {
                             {
                                 tabLabel: "Global Feed",
                                 render: () => (
-                                    <FeedList
-                                        api={() => articleApi.getArticleList()}
+                                    <PagingArticleList
+                                        api={(page) => articleApi.getArticleList(page)}
                                     />
                                 )
                             }

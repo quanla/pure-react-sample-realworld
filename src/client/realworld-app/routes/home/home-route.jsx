@@ -4,6 +4,7 @@ import {Layout} from "../layout/layout";
 import {tagApi} from "../../../api/tag-api";
 import {LoadingPanel} from "../../../common/loading-panel/loading-panel";
 import {FeedsPanel} from "./feeds-panel";
+import {userInfo} from "../../authen/user-info";
 
 export class HomeRoute extends RComponent {
 
@@ -15,6 +16,8 @@ export class HomeRoute extends RComponent {
         };
 
         tagApi.getTags().then((tags) => this.setState({tags}));
+        this.onUnmount(userInfo.onChange(() => this.forceUpdate()));
+
     }
 
     render() {
@@ -28,12 +31,14 @@ export class HomeRoute extends RComponent {
             >
                 <div className="home-page">
 
-                    <div className="banner">
-                        <div className="container">
-                            <h1 className="logo-font">conduit</h1>
-                            <p>A place to share your knowledge.</p>
+                    {userInfo.getUser() == null && (
+                        <div className="banner">
+                            <div className="container">
+                                <h1 className="logo-font">conduit</h1>
+                                <p>A place to share your knowledge.</p>
+                            </div>
                         </div>
-                    </div>
+                    )}
 
                     <div className="container page">
                         <div className="row">

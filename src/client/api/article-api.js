@@ -1,11 +1,11 @@
 const api = require("./api").api;
 
 const articleApi = {
-    getArticleList() {
-        return api.get(`/articles?limit=10&offset=0`);
+    getArticleList(page) {
+        return api.get(`/articles?limit=10&offset=${page * 10}`);
     },
-    getMyFeedList() {
-        return api.get(`/articles/feed?limit=10&offset=0`);
+    getMyFeedList(page) {
+        return api.get(`/articles/feed?limit=10&offset=${page * 10}`);
     },
 };
 

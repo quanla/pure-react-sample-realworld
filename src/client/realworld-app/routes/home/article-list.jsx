@@ -1,8 +1,10 @@
 import classnames from "classnames";
 import {RComponent} from "../../../common/r-component";
+import {Fragment} from "react";
 import {Link} from "react-router-dom";
+import {Pagination} from "./pagination";
 
-export class FeedList extends RComponent {
+export class ArticleList extends RComponent {
 
     constructor(props, context) {
         super(props, context);
@@ -11,14 +13,17 @@ export class FeedList extends RComponent {
             articles: null,
         };
 
-        props.api().then(({articles}) => this.setState({articles}));
+        props.api(props.page).then(({articles, articlesCount}) => {
+            props.onRetrieveArticlesCount(articlesCount);
+            this.setState({articles});
+        });
     }
 
     render() {
         const {articles} = this.state;
 
         return (
-            <div className="">
+            <Fragment>
                 {articles == null ? (
                     <div className="article-preview">
                         Loading articles...
@@ -61,7 +66,7 @@ export class FeedList extends RComponent {
                         </div>
                     ))
                 )}
-            </div>
+            </Fragment>
         );
     }
 }
