@@ -47,6 +47,7 @@ export class Layout extends RComponent {
 
                             {userInfo.getUser() == null ? (
                                 <Fragment>
+                                    {renderNavItem("Sign in", "/login")}
                                     {renderNavItem("Sign up", "/register")}
                                 </Fragment>
                             ) : (

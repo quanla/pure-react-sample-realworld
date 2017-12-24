@@ -3,6 +3,7 @@ import {RComponent} from "../common/r-component";
 import {userInfo} from "./authen/user-info";
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import {HomeRoute} from "./routes/home/home-route";
+import {RegisterRoute} from "./routes/register/register-route";
 
 export class RealWorldApp extends RComponent {
 
@@ -25,12 +26,13 @@ export class RealWorldApp extends RComponent {
 
 const renderRoutes = (user) => {
     const requireAuthen = (comp) => user == null ? redirect("/login") : comp;
-    const requireUnauthen = (comp) => user != null ? redirect("/home") : comp;
+    const requireUnauthen = (comp) => user != null ? redirect("/") : comp;
 
     return (
         <HashRouter>
             <Switch>
                 <Route exact path='/' component={HomeRoute}/>
+                <Route exact path='/register' component={requireUnauthen(RegisterRoute)}/>
             </Switch>
         </HashRouter>
     );
