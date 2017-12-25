@@ -24,9 +24,12 @@ export class PagingArticleList extends RComponent {
             <Fragment>
                 <ArticleList
                     key={page}
-                    api={api}
-                    page={page}
-                    onRetrieveArticlesCount={(_articlesCount) => articlesCount == null && this.setState({articlesCount: _articlesCount})}
+                    api={() => api(page).then(({articles, articlesCount}) => {
+                        if (this.state.articlesCount == null) {
+                            this.setState({articlesCount});
+                        }
+                        return articles;
+                    })}
                 />
 
                 {!!articlesCount && (

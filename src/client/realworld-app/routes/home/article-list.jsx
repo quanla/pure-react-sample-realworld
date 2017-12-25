@@ -2,7 +2,6 @@ import classnames from "classnames";
 import {RComponent} from "../../../common/r-component";
 import {Fragment} from "react";
 import {Link} from "react-router-dom";
-import {Pagination} from "./pagination";
 
 export class ArticleList extends RComponent {
 
@@ -13,10 +12,7 @@ export class ArticleList extends RComponent {
             articles: null,
         };
 
-        props.api(props.page).then(({articles, articlesCount}) => {
-            props.onRetrieveArticlesCount(articlesCount);
-            this.setState({articles});
-        });
+        props.api().then((articles) => this.setState({articles}));
     }
 
     render() {
