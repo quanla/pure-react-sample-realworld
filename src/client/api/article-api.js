@@ -31,6 +31,9 @@ const articleApi = {
     deleteComment(id, articleSlug) {
         return fetcher.delete(`/articles/${articleSlug}/comments/${id}`);
     },
+    changeFavorite(favorite, articleSlug) {
+        return fetcher[favorite? "post":"delete"](`/articles/${articleSlug}/favorite`).then(({article}) => article);
+    },
 };
 
 exports.articleApi = articleApi;

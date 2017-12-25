@@ -3,6 +3,8 @@ import {RComponent} from "../../../common/r-component";
 import {Fragment} from "react";
 import {Link} from "react-router-dom";
 import moment from "moment";
+import {FavoriteButton} from "../common/favorite-button";
+import {Cols} from "../../../../utils/cols";
 
 export class ArticleList extends RComponent {
 
@@ -38,14 +40,17 @@ export class ArticleList extends RComponent {
                                     <Link to={`/@${article.author.username}`} className="author">{article.author.username}</Link>
                                     <span className="date">{moment(article.createdAt).format("LL")}</span>
                                 </div>
-                                <button
-                                    className={classnames(
-                                        "btn btn-sm pull-xs-right",
-                                        article.favorited ? "btn-primary" : "btn-outline-primary"
-                                    )}
-                                >
-                                    <i className="ion-heart"/> {article.favoritesCount}
-                                </button>
+
+                                <FavoriteButton
+                                    favorited={article.favorited}
+                                    favoritesCount={article.favoritesCount}
+                                    articleSlug={article.slug}
+                                    onChange={({favorited, favoritesCount}) => this.setState({articles: Cols.replace1(articles, article, {
+                                        ...article,
+                                        favorited,
+                                        favoritesCount
+                                    })})}
+                                />
                             </div>
                             <Link to={`/article/${article.slug}`} className="preview-link">
                                 <h1>{article.title}</h1>
