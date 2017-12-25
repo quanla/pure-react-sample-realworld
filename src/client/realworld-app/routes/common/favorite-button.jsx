@@ -23,17 +23,30 @@ export class FavoriteButton extends RComponent {
     }
 
     render() {
-        const {favorited, favoritesCount} = this.props;
+        const {favorited, favoritesCount, className, long} = this.props;
+        const {loading} = this.state;
 
         return (
             <button
                 className={classnames(
-                    "btn btn-sm pull-xs-right",
+                    "btn btn-sm",
+                    className,
                     favorited ? "btn-primary" : "btn-outline-primary"
                 )}
+                disabled={loading}
                 onClick={() => this.change(!favorited)}
             >
-                <i className="ion-heart"/> {favoritesCount}
+                {!long ? (
+                    <Fragment>
+                        <i className="ion-heart"/> {favoritesCount}
+                    </Fragment>
+                ) : (
+                    <Fragment>
+                        <i className="ion-heart"/>
+                        &nbsp;
+                        Favorite Article <span className="counter">({favoritesCount})</span>
+                    </Fragment>
+                )}
             </button>
         );
     }

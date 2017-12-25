@@ -5,6 +5,7 @@ import {Fragment} from "react";
 import moment from "moment";
 import {FollowButton} from "../common/follow-button";
 import {O} from "../../../../utils/object-util";
+import {FavoriteButton} from "../common/favorite-button";
 
 export class ArticleMeta extends RComponent {
 
@@ -23,11 +24,17 @@ export class ArticleMeta extends RComponent {
                     onChange={(following) => onChange(O.updatePath(article, "author.following", following))}
                 />
                 &nbsp;&nbsp;
-                <button className={classnames("btn btn-sm", article.favorited ? "btn-primary" : "btn-outline-primary")}>
-                    <i className="ion-heart"/>
-                    &nbsp;
-                    Favorite Article <span className="counter">({article.favoritesCount})</span>
-                </button>
+                <FavoriteButton
+                    favorited={article.favorited}
+                    favoritesCount={article.favoritesCount}
+                    articleSlug={article.slug}
+                    onChange={({favorited, favoritesCount}) => onChange({
+                        ...article,
+                        favorited,
+                        favoritesCount
+                    })}
+                    long
+                />
             </div>
         );
     }

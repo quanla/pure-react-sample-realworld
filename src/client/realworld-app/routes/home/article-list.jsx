@@ -42,6 +42,7 @@ export class ArticleList extends RComponent {
                                 </div>
 
                                 <FavoriteButton
+                                    className="pull-xs-right"
                                     favorited={article.favorited}
                                     favoritesCount={article.favoritesCount}
                                     articleSlug={article.slug}
