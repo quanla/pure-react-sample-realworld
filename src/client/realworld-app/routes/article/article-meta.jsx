@@ -12,7 +12,7 @@ export class ArticleMeta extends RComponent {
             <div className="article-meta">
                 <Link to={`/@${article.author.username}`}><img src={article.author.image} /></Link>
                 <div className="info">
-                    <a href="" className="author">{article.author.username}</a>
+                    <Link to={`/@${article.author.username}`} className="author">{article.author.username}</Link>
                     <span className="date">{moment(article.createdAt).format("LL")}</span>
                 </div>
                 <button className="btn btn-sm btn-outline-secondary">

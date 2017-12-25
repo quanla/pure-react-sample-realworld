@@ -48,14 +48,14 @@ const renderRoutes = (user) => {
     return (
         <HashRouter>
             <Switch>
-                <Route exact path='/' component={HomeRoute}/>
-                <Route path='/@:username' component={ProfileRoute}/>
-                <Route path='/article/:slug' component={ArticleRoute}/>
-                <Route exact path='/register' component={requireUnauthen(RegisterRoute)}/>
-                <Route exact path='/login' component={requireUnauthen(LoginRoute)}/>
+                <Route exact path="/" component={HomeRoute}/>
+                <Route path="/@:username" component={ProfileRoute}/>
+                <Route path="/article/:slug" component={ArticleRoute}/>
+                <Route exact path="/register" component={requireUnauthen(RegisterRoute)}/>
+                <Route exact path="/login" component={requireUnauthen(LoginRoute)}/>
 
-                <Route exact path='/settings' component={requireAuthen(SettingsRoute)}/>
-                <Route exact path='/editor/' component={requireAuthen(EditorRoute)}/>
+                <Route exact path="/settings" component={requireAuthen(SettingsRoute)}/>
+                <Route exact path="/editor/" component={requireAuthen(EditorRoute)}/>
             </Switch>
         </HashRouter>
     );

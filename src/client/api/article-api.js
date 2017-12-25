@@ -19,6 +19,15 @@ const articleApi = {
     createArticle(article) {
         return fetcher.post(`/articles`, {article});
     },
+    getComments(articleSlug) {
+        return fetcher.get(`/articles/${articleSlug}/comments`).then(({comments}) => comments);
+    },
+    postComment(body, articleSlug) {
+        return fetcher.post(`/articles/${articleSlug}/comments`, {comment: {body}}).then(({comment}) => comment);
+    },
+    deleteComment(id, articleSlug) {
+        return fetcher.delete(`/articles/${articleSlug}/comments/${id}`);
+    },
 };
 
 exports.articleApi = articleApi;

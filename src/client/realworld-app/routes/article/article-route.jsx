@@ -5,7 +5,7 @@ import {articleApi} from "../../../api/article-api";
 import {Link} from "react-router-dom";
 import {Fragment} from "react";
 import {LoadingPanel} from "../../../common/loading-panel/loading-panel";
-import {CommentsBox} from "./comments-box";
+import {CommentsBox} from "./comments-box/comments-box";
 import {ArticleMeta} from "./article-meta";
 import {MarkDown} from "./markdown";
 
@@ -89,7 +89,9 @@ export class ArticleRoute extends RComponent {
 
                             <div className="col-xs-12 col-md-8 offset-md-2">
 
-                                <CommentsBox/>
+                                <CommentsBox
+                                    articleSlug={this.props.match.params.slug}
+                                />
 
                             </div>
 
