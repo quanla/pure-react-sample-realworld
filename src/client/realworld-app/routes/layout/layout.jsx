@@ -55,13 +55,13 @@ export class Layout extends RComponent {
                                 <Fragment>
                                     {renderNavItem((
                                         <Fragment>
-                                            <i className="ion-compose"></i>&nbsp;New Article
+                                            <i className="ion-compose"/>&nbsp;New Article
                                         </Fragment>
                                     ), "/editor")}
 
                                     {renderNavItem((
                                         <Fragment>
-                                            <i className="ion-gear-a"></i>&nbsp;Settings
+                                            <i className="ion-gear-a"/>&nbsp;Settings
                                         </Fragment>
                                     ), "/settings")}
 

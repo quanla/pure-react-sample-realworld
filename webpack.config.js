@@ -32,6 +32,7 @@ module.exports = {
             "react-dom": path.resolve(__dirname, 'src/build/webpack-alias-react-dom.js'),
             "react-router": path.resolve(__dirname, 'src/build/webpack-alias-react-router.js'),
             "react-router-dom": path.resolve(__dirname, 'src/build/webpack-alias-react-router-dom.js'),
+            "moment": path.resolve(__dirname, 'src/build/webpack-alias-moment.js'),
         },
     },
 };

@@ -2,6 +2,7 @@ import classnames from "classnames";
 import {RComponent} from "../../../common/r-component";
 import {Fragment} from "react";
 import {Link} from "react-router-dom";
+import moment from "moment";
 
 export class ArticleList extends RComponent {
 
@@ -35,7 +36,7 @@ export class ArticleList extends RComponent {
                                 <Link to={`/@${article.author.username}`}><img src={article.author.image} /></Link>
                                 <div className="info">
                                     <Link to={`/@${article.author.username}`} className="author">{article.author.username}</Link>
-                                    <span className="date">{article.createdAt} January 20th</span>
+                                    <span className="date">{moment(article.createdAt).format("LL")}</span>
                                 </div>
                                 <button
                                     className={classnames(
