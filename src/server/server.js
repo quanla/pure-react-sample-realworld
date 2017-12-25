@@ -1,3 +1,3 @@
-const {PrototypeServer} = require("../build/prototype-server/prototype-server");
+const {PrototypeServer} = require("../../build/prototype-server/prototype-server");
 
-PrototypeServer.startLocal(require("../build/prototype-server-config"), 1221);
+PrototypeServer.startLocal(require("../../build/prototype-server-config"), 1221);

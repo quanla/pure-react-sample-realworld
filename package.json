@@ -20,7 +20,12 @@
     "classnames": "^2.2.5",
     "express": "^4.16.2",
     "gulp": "^3.9.1",
-    "markdown": "^0.5.0"
+    "markdown": "^0.5.0",
+    "moment": "^2.20.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "archiver": "^2.1.0",

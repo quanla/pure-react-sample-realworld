@@ -12,7 +12,7 @@ const Deploy = {
     doDeploy() {
         var PrototypePackager = require("./prototype-server/prototype-packager.js").PrototypePackager;
 
-        PrototypePackager.packageServer(require("./prototype-server-config"), __dirname + "/../..").then(() => {
+        PrototypePackager.packageServer(require("./prototype-server-config"), __dirname + "/..").then(() => {
             let uploadedPath = process.cwd() + "/example.zip";
             let deployDir = `//Users/quanle/Documents/Workon/Pure-React/sample-realworld-deploy`;
             extract(uploadedPath, {dir: deployDir}, function (err) {

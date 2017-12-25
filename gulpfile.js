@@ -1,6 +1,6 @@
 var gulp = require("gulp");
 var spawn = require('child_process').spawn;
-let {Deploy} = require("./src/build/deploy");
+let {Deploy} = require("./build/deploy");
 
 gulp.task("build:watch", () => {
     if (!/^win/.test(process.platform)) { // linux
