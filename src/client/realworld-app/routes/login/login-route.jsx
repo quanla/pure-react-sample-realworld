@@ -14,10 +14,10 @@ export class LoginRoute extends RComponent {
         super(props, context);
 
         this.state = {
-            email: "quanla2003@gmail.com",
-            password: "123123",
-            // email: null,
-            // password: null,
+            // email: "quanla2003@gmail.com",
+            // password: "123123",
+            email: null,
+            password: null,
             errors: null,
             submitting: false,
         };
