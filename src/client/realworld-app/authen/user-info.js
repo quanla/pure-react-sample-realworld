@@ -3,7 +3,11 @@ import {Cols} from "../../../utils/cols";
 let changeListeners = [];
 let user = (()=> {
     let dataString = localStorage.getItem("user-info");
-    return dataString == null || dataString=="undefined" ? null : JSON.parse(dataString);
+    let user = dataString == null || dataString=="undefined" ? null : JSON.parse(dataString);
+    if (user.token == null) {
+        return null;
+    }
+    return user;
 })();
 
 const userInfo = {
