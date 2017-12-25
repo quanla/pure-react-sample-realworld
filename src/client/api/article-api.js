@@ -7,6 +7,9 @@ const articleApi = {
     getArticleList(page) {
         return fetcher.get(`/articles?limit=10&offset=${page * 10}`);
     },
+    getArticleListByTag(page, tag) {
+        return fetcher.get(`/articles?limit=10&offset=${page * 10}&tag=${tag}`);
+    },
     getMyFeedList(page) {
         return fetcher.get(`/articles/feed?limit=10&offset=${page * 10}`);
     },

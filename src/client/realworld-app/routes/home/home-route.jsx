@@ -5,6 +5,8 @@ import {tagApi} from "../../../api/tag-api";
 import {LoadingPanel} from "../../../common/loading-panel/loading-panel";
 import {FeedsPanel} from "./feeds-panel";
 import {userInfo} from "../../authen/user-info";
+import {PagingArticleList} from "./paging-article-list";
+import {articleApi} from "../../../api/article-api";
 
 export class HomeRoute extends RComponent {
 
@@ -13,6 +15,7 @@ export class HomeRoute extends RComponent {
 
         this.state = {
             tags: null,
+            showTag: null,
         };
 
         tagApi.getTags().then((tags) => this.setState({tags}));
@@ -22,7 +25,7 @@ export class HomeRoute extends RComponent {
 
     render() {
         const {history} = this.props;
-        const {tags} = this.state;
+        const {tags, showTag} = this.state;
 
         return (
             <Layout
@@ -45,6 +48,18 @@ export class HomeRoute extends RComponent {
 
                             <FeedsPanel
                                 className="col-md-9"
+                                forcedTab={
+                                    showTag && ({
+                                        tabLabel: `# ${showTag}`,
+                                        render: () => (
+                                            <PagingArticleList
+                                                key={showTag}
+                                                api={(page) => articleApi.getArticleListByTag(page, showTag)}
+                                            />
+                                        )
+                                    })
+                                }
+                                onChangedTab={() => showTag && this.setState({showTag: null})}
                             />
 
                             <div className="col-md-3">
@@ -56,7 +71,13 @@ export class HomeRoute extends RComponent {
                                             <LoadingPanel/>
                                         ) : (
                                             tags.map((tag) => (
-                                                <a href="" className="tag-pill tag-default">{tag}</a>
+                                                <a
+                                                    href="" className="tag-pill tag-default"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        this.setState({showTag: tag});
+                                                    }}
+                                                >{tag}</a>
                                             ))
                                         )}
                                     </div>
