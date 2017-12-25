@@ -2,7 +2,6 @@ import classnames from "classnames";
 import {RComponent} from "../../../common/r-component";
 import {Link} from "react-router-dom";
 import {Fragment} from "react";
-import moment from "moment";
 import {FollowButton} from "../common/follow-button";
 import {O} from "../../../../utils/object-util";
 import {FavoriteButton} from "../common/favorite-button";
@@ -16,7 +15,7 @@ export class ArticleMeta extends RComponent {
                 <Link to={`/@${article.author.username}`}><img src={article.author.image} /></Link>
                 <div className="info">
                     <Link to={`/@${article.author.username}`} className="author">{article.author.username}</Link>
-                    <span className="date">{moment(article.createdAt).format("LL")}</span>
+                    <span className="date">{new Date(article.updatedAt).toLocaleString()}</span>
                 </div>
                 <FollowButton
                     username={article.author.username}

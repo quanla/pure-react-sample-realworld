@@ -1,6 +1,5 @@
 import classnames from "classnames";
 import {Fragment} from "react";
-import moment from "moment";
 import {Link} from "react-router-dom";
 import {RComponent} from "../../../../common/r-component";
 import {articleApi} from "../../../../api/article-api";
@@ -45,7 +44,7 @@ export class CommentsBox extends RComponent {
                                 </Link>
                                 &nbsp;
                                 <a href="" className="comment-author">{comment.author.username}</a>
-                                <span className="date-posted">{moment(comment.createdAt).format("LL")}</span>
+                                <span className="date-posted">{new Date(comment.createdAt).toLocaleString()}</span>
 
                                 <span className="mod-options">
                               <i
