@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {userApi} from "../../../api/user-api";
 import {O} from "../../../../utils/object-util";
 import {userInfo} from "../../authen/user-info";
+import {renderErrorMessages} from "../common/render-error-messages";
 
 export class LoginRoute extends RComponent {
 
@@ -47,18 +48,6 @@ export class LoginRoute extends RComponent {
             onChange: (e) => this.setState({[statePath]: e.target.value}),
         });
 
-        const renderErrorMessages = () => (
-            errors && (
-                <ul className="error-messages">
-                    {O.mapValuesToList(errors, (errList, field) => (
-                        errList.map((errMessage) => (
-                            <li>{field} {errMessage}</li>
-                        ))
-                    ))}
-                </ul>
-            )
-        );
-
         return (
             <Layout
                 windowTitle="Sign Up"
@@ -74,7 +63,7 @@ export class LoginRoute extends RComponent {
                                     <Link to="/register">Need an account?</Link>
                                 </p>
 
-                                {renderErrorMessages()}
+                                {renderErrorMessages(errors)}
 
                                 <form
                                     onSubmit={(e) => {
