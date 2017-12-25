@@ -46,7 +46,7 @@ export class ArticleList extends RComponent {
                                     <i className="ion-heart"/> {article.favoritesCount}
                                 </button>
                             </div>
-                            <a href="" className="preview-link">
+                            <Link to={`/article/${article.slug}`} className="preview-link">
                                 <h1>{article.title}</h1>
                                 <p>{article.description}</p>
                                 <span>Read more...</span>
@@ -58,7 +58,7 @@ export class ArticleList extends RComponent {
                                         </li>
                                     ))}
                                 </ul>
-                            </a>
+                            </Link>
                         </div>
                     ))
                 )}

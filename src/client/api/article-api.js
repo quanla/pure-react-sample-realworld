@@ -1,6 +1,9 @@
 const fetcher = require("./fetcher").fetcher;
 
 const articleApi = {
+    getArticle(slug) {
+        return fetcher.get(`/articles/${slug}`).then(({article}) => article);
+    },
     getArticleList(page) {
         return fetcher.get(`/articles?limit=10&offset=${page * 10}`);
     },
@@ -12,6 +15,9 @@ const articleApi = {
     },
     getFavoritedArticleList(page, by) {
         return fetcher.get(`/articles?favorited=${by}&limit=5&offset=${page * 5}`);
+    },
+    createArticle(article) {
+        return fetcher.post(`/articles`, {article});
     },
 };
 

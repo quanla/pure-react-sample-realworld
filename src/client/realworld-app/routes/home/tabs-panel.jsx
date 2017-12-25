@@ -28,7 +28,7 @@ export class TabsPanel extends RComponent {
                         {tabs.map((tab, i) => (
                             <li className="nav-item">
                                 <a
-                                    className={`nav-link ${selectedIndex == i ? "active" : "disabled"}`}
+                                    className={`nav-link ${selectedIndex == i && "active"}`}
                                     href=""
                                     onClick={(e) => {
                                         e.preventDefault();
