@@ -4,7 +4,7 @@ let changeListeners = [];
 let user = (()=> {
     let dataString = localStorage.getItem("user-info");
     let user = dataString == null || dataString=="undefined" ? null : JSON.parse(dataString);
-    if (user.token == null) {
+    if (user == null || user.token == null) {
         return null;
     }
     return user;
