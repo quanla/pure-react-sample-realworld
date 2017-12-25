@@ -7,6 +7,7 @@ import {RegisterRoute} from "./routes/register/register-route";
 import {LoginRoute} from "./routes/login/login-route";
 import {fetcherConfig} from "../api/fetcher";
 import {SettingsRoute} from "./routes/settings/settings-route";
+import {ProfileRoute} from "./routes/profile/profile-route";
 
 export class RealWorldApp extends RComponent {
 
@@ -46,6 +47,7 @@ const renderRoutes = (user) => {
         <HashRouter>
             <Switch>
                 <Route exact path='/' component={HomeRoute}/>
+                <Route path='/@:username' component={ProfileRoute}/>
                 <Route exact path='/register' component={requireUnauthen(RegisterRoute)}/>
                 <Route exact path='/login' component={requireUnauthen(LoginRoute)}/>
 

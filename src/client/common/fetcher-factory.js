@@ -2,23 +2,26 @@ const O = require("../../utils/object-util").O;
 const FetcherFactory = {
     createApi({urlModifier, getHeaders}) {
 
-        const withPayload = (method) => (url, data) => {
+
+        let createHeaders = () => {
             let headers = new Headers();
-            headers.append("Content-Type", "application/json");
             O.forEach(getHeaders(), (value, key) =>
                 headers.append(key, value)
             );
+            return headers;
+        };
+
+        const withPayload = (method) => (url, data) => {
+            let headers = createHeaders();
+            headers.append("Content-Type", "application/json");
             return fetch(urlModifier(url), {
                 method,
                 body: JSON.stringify(data),
                 headers,
             }).then((response) => response.json());
         };
-        const withputPayload = (method) => (url) => {
-            var headers = new Headers();
-            O.forEach(getHeaders(), (value, key) =>
-                headers.append(key, value)
-            );
+        const withoutPayload = (method) => (url) => {
+            let headers = createHeaders();
             return fetch(urlModifier(url), {
                 method,
                 headers
@@ -26,8 +29,8 @@ const FetcherFactory = {
         };
 
         return {
-            get: withputPayload("GET"),
-            delete: withputPayload("DELETE"),
+            get: withoutPayload("GET"),
+            delete: withoutPayload("DELETE"),
             post: withPayload("POST"),
             put: withPayload("PUT"),
         };

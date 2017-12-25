@@ -32,7 +32,7 @@ export class PagingArticleList extends RComponent {
                     })}
                 />
 
-                {!!articlesCount && (
+                {!!articlesCount && articlesCount > 1 && (
                     <Pagination
                         total={Math.ceil(articlesCount/10)}
                         current={page}

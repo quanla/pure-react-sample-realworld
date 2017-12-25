@@ -14,7 +14,7 @@ For more information on how to this works with other frontends/backends, head ov
 
 # How it works
 
-Only React as the framework of this system. Heavy use of React component state, component lifecycle. Not use React mixins or Context at all
+React itself as the framework of this system. Please stop thinking that React is only a view lib and not qualified as a framework. This system make heavy use of React component state and component lifecycle. Note that React mixins or React context are not used at all.
 
 # Getting started
 
