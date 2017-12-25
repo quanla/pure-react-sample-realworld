@@ -7,6 +7,9 @@ const userApi = {
     login({email, password}) {
         return fetcher.post("/users/login", {user: {email, password}});
     },
+    updateUser(user) {
+        return fetcher.put("/user", {user});
+    },
 };
 
 exports.userApi = userApi;

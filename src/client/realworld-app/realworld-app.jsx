@@ -39,7 +39,7 @@ export class RealWorldApp extends RComponent {
 }
 
 const renderRoutes = (user) => {
-    const requireAuthen = (comp) => user == null ? redirect("/login") : comp;
+    const requireAuthen = (comp) => user == null ? redirect("/") : comp;
     const requireUnauthen = (comp) => user != null ? redirect("/") : comp;
 
     return (

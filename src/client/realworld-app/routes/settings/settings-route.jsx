@@ -14,8 +14,25 @@ export class SettingsRoute extends RComponent {
 
         this.state = {
             user: userInfo.getUser(),
-            errors
+            errors: null,
         };
+    }
+
+    doSubmit() {
+        const {history} = this.props;
+        const {user} = this.state;
+
+        this.setState({submitting: true});
+
+        userApi.updateUser(user).then(({errors, user}) => {
+
+            if (errors) {
+                this.setState({submitting: false, errors});
+            } else {
+                userInfo.setUser(user);
+                history.push(`/@${user.username}`)
+            }
+        });
     }
 
     render() {
@@ -40,29 +57,34 @@ export class SettingsRoute extends RComponent {
                                 <h1 className="text-xs-center">Your Settings</h1>
 
                                 {renderErrorMessages(errors)}
-                                <form>
+                                <form
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
+                                        this.doSubmit();
+                                    }}
+                                >
                                     <fieldset>
-                                        <fieldset className="form-group">
+                                        <fieldset className="form-group" disabled={submitting}>
                                             <input className="form-control" type="text" placeholder="URL of profile picture"
                                                    {...bind("image")}
                                             />
                                         </fieldset>
-                                        <fieldset className="form-group">
+                                        <fieldset className="form-group" disabled={submitting}>
                                             <input className="form-control form-control-lg" type="text" placeholder="Your Name"
                                                    {...bind("username")}
                                             />
                                         </fieldset>
-                                        <fieldset className="form-group">
+                                        <fieldset className="form-group" disabled={submitting}>
                                             <textarea className="form-control form-control-lg" rows="8" placeholder="Short bio about you"
                                                       {...bind("bio")}
                                             />
                                         </fieldset>
-                                        <fieldset className="form-group">
+                                        <fieldset className="form-group" disabled={submitting}>
                                             <input className="form-control form-control-lg" type="text" placeholder="Email"
                                                    {...bind("email")}
                                             />
                                         </fieldset>
-                                        <fieldset className="form-group">
+                                        <fieldset className="form-group" disabled={submitting}>
                                             <input className="form-control form-control-lg" type="password" placeholder="New Password"
                                                    {...bind("password")}
                                             />
@@ -72,6 +94,14 @@ export class SettingsRoute extends RComponent {
                                         </button>
                                     </fieldset>
                                 </form>
+
+                                <hr/>
+                                <button
+                                    className="btn btn-outline-danger"
+                                    onClick={() => userInfo.setUser(null)}
+                                >
+                                    Or click here to logout.
+                                </button>
                             </div>
 
                         </div>
