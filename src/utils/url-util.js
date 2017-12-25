@@ -1,7 +1,8 @@
+const O = require("./object-util").O;
 const UrlUtil = {
     queryString(params) {
         let ret = "";
-        _.forEach(params, (v, k)=> {
+        O.forEach(params, (v, k)=> {
             if (v == null) {
                 return;
             }

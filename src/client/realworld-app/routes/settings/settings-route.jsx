@@ -41,7 +41,7 @@ export class SettingsRoute extends RComponent {
 
         const bind = (path) => ({
             value: user[path] == null ? "" : user[path],
-            onChange: (e) => this.setState({user: {...user, [path]: e.target.value}}),
+            onChange: (e) => this.setState({user: {...user, [path]: e.target.value == "" ? null : e.target.value}}),
         });
 
         return (

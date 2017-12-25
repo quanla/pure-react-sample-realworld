@@ -1,9 +1,9 @@
 import classnames from "classnames";
 import {Fragment} from "react";
+import {Link} from "react-router-dom";
 import {RComponent} from "../../../../common/r-component";
 import {StringUtil} from "../../../../../utils/string-util";
 import {userInfo} from "../../../authen/user-info";
-import {articleApi} from "../../../../api/article-api";
 
 export class CommentForm extends RComponent {
 
