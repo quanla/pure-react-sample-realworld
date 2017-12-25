@@ -4,6 +4,7 @@ import {RComponent} from "../../../common/r-component";
 import {Layout} from "../layout/layout";
 import {Link} from "react-router-dom";
 import {userApi} from "../../../api/user-api";
+import {O} from "../../../../utils/object-util";
 
 export class RegisterRoute extends RComponent {
 
@@ -20,27 +21,42 @@ export class RegisterRoute extends RComponent {
     }
 
     doRegister() {
+        const {history} = this.props;
         const {email, password, username} = this.state;
 
         this.setState({submitting: true});
 
-        userApi.register({email, password, username}).then(() => {
+        userApi.register({email, password, username}).then(({errors}) => {
 
-            this.setState({submitting: false});
+            if (errors) {
+                this.setState({submitting: false, errors});
+            } else {
+                history.push("/");
+            }
         });
-
-        // errors
     }
 
     render() {
 
-        const {submitting} = this.state;
+        const {submitting, errors} = this.state;
         const {history} = this.props;
 
         const bind = (statePath) => ({
             value: this.state[statePath] == null ? "" : this.state[statePath],
             onChange: (e) => this.setState({[statePath]: e.target.value}),
         });
+
+        const renderErrorMessages = () => (
+            errors && (
+                <ul className="error-messages">
+                    {O.mapValuesToList(errors, (errList, field) => (
+                        errList.map((errMessage) => (
+                            <li>{field} {errMessage}</li>
+                        ))
+                    ))}
+                </ul>
+            )
+        );
 
         return (
             <Layout
@@ -57,9 +73,7 @@ export class RegisterRoute extends RComponent {
                                     <Link to="/login">Have an account?</Link>
                                 </p>
 
-                                <ul className="error-messages">
-                                    <li>That email is already taken</li>
-                                </ul>
+                                {renderErrorMessages()}
 
                                 <form
                                     onSubmit={(e) => {
@@ -85,7 +99,6 @@ export class RegisterRoute extends RComponent {
                                     </fieldset>
                                     <button
                                         className="btn btn-lg btn-primary pull-xs-right"
-                                        onClick={(e) => this.doRegister()}
                                     >
                                         Sign up
                                     </button>

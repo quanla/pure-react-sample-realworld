@@ -1,11 +1,11 @@
-const api = require("./api").api;
+const fetcher = require("./fetcher").fetcher;
 
 const articleApi = {
     getArticleList(page) {
-        return api.get(`/articles?limit=10&offset=${page * 10}`);
+        return fetcher.get(`/articles?limit=10&offset=${page * 10}`);
     },
     getMyFeedList(page) {
-        return api.get(`/articles/feed?limit=10&offset=${page * 10}`);
+        return fetcher.get(`/articles/feed?limit=10&offset=${page * 10}`);
     },
 };
 

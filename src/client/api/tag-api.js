@@ -1,8 +1,8 @@
-const api = require("./api").api;
+const fetcher = require("./fetcher").fetcher;
 
 const tagApi = {
     getTags() {
-        return api.get("/tags").then((resp) => resp.tags);
+        return fetcher.get("/tags").then((resp) => resp.tags);
     },
 };
 
