@@ -34,6 +34,7 @@ export class Layout extends RComponent {
             </li>
         );
 
+        let user = userInfo.getUser();
         return (
             <Fragment>
 
@@ -45,7 +46,7 @@ export class Layout extends RComponent {
                         <ul className="nav navbar-nav pull-xs-right">
                             {renderNavItem("Home", "/")}
 
-                            {userInfo.getUser() == null ? (
+                            {user == null ? (
                                 <Fragment>
                                     {renderNavItem("Sign in", "/login")}
                                     {renderNavItem("Sign up", "/register")}
@@ -63,6 +64,8 @@ export class Layout extends RComponent {
                                             <i className="ion-gear-a"></i>&nbsp;Settings
                                         </Fragment>
                                     ), "/settings")}
+
+                                    {renderNavItem((user.username), `/@${user.username}`)}
                                 </Fragment>
                             )}
                         </ul>

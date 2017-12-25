@@ -4,6 +4,8 @@ import {userInfo} from "./authen/user-info";
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import {HomeRoute} from "./routes/home/home-route";
 import {RegisterRoute} from "./routes/register/register-route";
+import {LoginRoute} from "./routes/login/login-route";
+import {fetcherConfig} from "../api/fetcher";
 
 export class RealWorldApp extends RComponent {
 
@@ -11,6 +13,17 @@ export class RealWorldApp extends RComponent {
         super(props, context);
 
         this.onUnmount(userInfo.onChange(() => this.forceUpdate()));
+
+        fetcherConfig.setHeaders(() => {
+            let user = userInfo.getUser();
+            if (user) {
+                return {
+                    "authorization": `Token ${user.token}`,
+                };
+            }
+            return {};
+        });
+
     }
 
     render() {
@@ -33,6 +46,7 @@ const renderRoutes = (user) => {
             <Switch>
                 <Route exact path='/' component={HomeRoute}/>
                 <Route exact path='/register' component={requireUnauthen(RegisterRoute)}/>
+                <Route exact path='/login' component={requireUnauthen(LoginRoute)}/>
             </Switch>
         </HashRouter>
     );

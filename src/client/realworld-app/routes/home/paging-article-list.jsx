@@ -29,7 +29,7 @@ export class PagingArticleList extends RComponent {
                     onRetrieveArticlesCount={(_articlesCount) => articlesCount == null && this.setState({articlesCount: _articlesCount})}
                 />
 
-                {articlesCount && (
+                {!!articlesCount && (
                     <Pagination
                         total={Math.ceil(articlesCount/10)}
                         current={page}

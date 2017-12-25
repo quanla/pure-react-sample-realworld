@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import {RComponent} from "../../../common/r-component";
+import {Fragment} from "react";
 
 export class TabsPanel extends RComponent {
     constructor(props, context) {
@@ -26,13 +27,22 @@ export class TabsPanel extends RComponent {
                     <ul className="nav nav-pills outline-active">
                         {tabs.map((tab, i) => (
                             <li className="nav-item">
-                                <a className={`nav-link ${selectedIndex == i ? "active" : "disabled"}`} href="">{tab.tabLabel}</a>
+                                <a
+                                    className={`nav-link ${selectedIndex == i ? "active" : "disabled"}`}
+                                    href=""
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        this.setState({selectedIndex: i});
+                                    }}
+                                >{tab.tabLabel}</a>
                             </li>
                         ))}
                     </ul>
                 </div>
 
-                {tabs[selectedIndex].render()}
+                <Fragment key={selectedIndex}>
+                    {tabs[selectedIndex].render()}
+                </Fragment>
 
             </div>
         );

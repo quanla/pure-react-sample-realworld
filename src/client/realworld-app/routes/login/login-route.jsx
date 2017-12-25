@@ -7,26 +7,27 @@ import {userApi} from "../../../api/user-api";
 import {O} from "../../../../utils/object-util";
 import {userInfo} from "../../authen/user-info";
 
-export class RegisterRoute extends RComponent {
+export class LoginRoute extends RComponent {
 
     constructor(props, context) {
         super(props, context);
 
         this.state = {
-            email: null,
-            password: null,
-            username: null,
+            email: "quanla2003@gmail.com",
+            password: "123123",
+            // email: null,
+            // password: null,
             errors: null,
             submitting: false,
         };
     }
 
-    doRegister() {
-        const {email, password, username} = this.state;
+    doLogin() {
+        const {email, password} = this.state;
 
         this.setState({submitting: true});
 
-        userApi.register({email, password, username}).then(({errors, user}) => {
+        userApi.login({email, password}).then(({errors, user}) => {
 
             if (errors) {
                 this.setState({submitting: false, errors});
@@ -68,9 +69,9 @@ export class RegisterRoute extends RComponent {
                         <div className="row">
 
                             <div className="col-md-6 offset-md-3 col-xs-12">
-                                <h1 className="text-xs-center">Sign up</h1>
+                                <h1 className="text-xs-center">Sign In</h1>
                                 <p className="text-xs-center">
-                                    <Link to="/login">Have an account?</Link>
+                                    <Link to="/register">Need an account?</Link>
                                 </p>
 
                                 {renderErrorMessages()}
@@ -78,28 +79,25 @@ export class RegisterRoute extends RComponent {
                                 <form
                                     onSubmit={(e) => {
                                         e.preventDefault();
-                                        this.doRegister();
+                                        this.doLogin();
+                                        // return false;
                                     }}
                                 >
-                                    <fieldset className="form-group" disabled={submitting}>
-                                        <input className="form-control form-control-lg" type="text" placeholder="Your Name"
-                                               {...bind("username")}
-                                        />
-                                    </fieldset>
                                     <fieldset className="form-group" disabled={submitting}>
                                         <input className="form-control form-control-lg" type="text" placeholder="Email"
                                                {...bind("email")}
                                         />
                                     </fieldset>
                                     <fieldset className="form-group" disabled={submitting}>
-                                        <input className="form-control form-control-lg" type="password" placeholder="Password"
+                                        <input className="form-control form-control-lg" type="password"
+                                               placeholder="Password"
                                                {...bind("password")}
                                         />
                                     </fieldset>
                                     <button
                                         className="btn btn-lg btn-primary pull-xs-right"
                                     >
-                                        Sign up
+                                        Sign in
                                     </button>
                                 </form>
                             </div>
