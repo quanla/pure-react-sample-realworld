@@ -16,7 +16,7 @@ const FetcherFactory = {
             headers.append("Content-Type", "application/json");
             return fetch(urlModifier(url), {
                 method,
-                body: JSON.stringify(data),
+                body: data == null ? undefined : JSON.stringify(data),
                 headers,
             }).then((response) => response.json());
         };
