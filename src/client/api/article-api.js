@@ -1,3 +1,4 @@
+const apiAuthen = require("./api-authen").apiAuthen;
 const fetcher = require("./fetcher").fetcher;
 
 const articleApi = {
@@ -31,9 +32,9 @@ const articleApi = {
     deleteComment(id, articleSlug) {
         return fetcher.delete(`/articles/${articleSlug}/comments/${id}`);
     },
-    changeFavorite(favorite, articleSlug) {
+    changeFavorite: apiAuthen((favorite, articleSlug) => {
         return fetcher[favorite? "post":"delete"](`/articles/${articleSlug}/favorite`).then(({article}) => article);
-    },
+    }),
 };
 
 exports.articleApi = articleApi;

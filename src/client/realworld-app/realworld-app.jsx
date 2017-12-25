@@ -10,6 +10,7 @@ import {SettingsRoute} from "./routes/settings/settings-route";
 import {ProfileRoute} from "./routes/profile/profile-route";
 import {EditorRoute} from "./routes/editor/editor-route";
 import {ArticleRoute} from "./routes/article/article-route";
+import {apiAuthenConfig} from "../api/api-authen";
 
 export class RealWorldApp extends RComponent {
 
@@ -28,6 +29,13 @@ export class RealWorldApp extends RComponent {
             return {};
         });
 
+        apiAuthenConfig.setAuthen(() => {
+            if (userInfo.getUser()) {
+                return true;
+            }
+
+            window.location.hash = "/register";
+        });
     }
 
     render() {
