@@ -5,6 +5,7 @@ import {Link, Route} from "react-router-dom";
 import {profileApi} from "../../../api/profile-api";
 import {LoadingPanel} from "../../../common/loading-panel/loading-panel";
 import {userInfo} from "../../authen/user-info";
+import {FollowButton} from "../common/follow-button";
 
 export class ProfileHeader extends RComponent {
 
@@ -13,7 +14,6 @@ export class ProfileHeader extends RComponent {
 
         this.state = {
             profile: null,
-            following: false,
         };
 
         profileApi.getProfile(props.username).then((profile) => {
@@ -25,15 +25,10 @@ export class ProfileHeader extends RComponent {
         });
     }
 
-    follow(follow) {
-        const {username} = this.props;
-        this.setState({following: true});
-        profileApi[follow ? "follow": "unfollow"](username).then((profile) => this.setState({profile, following: false}));
-    }
 
     render() {
         const {username} = this.props;
-        const {profile, following} = this.state;
+        const {profile} = this.state;
 
         let user = userInfo.getUser();
         return (
@@ -53,15 +48,12 @@ export class ProfileHeader extends RComponent {
                         <i className="ion-gear-a"/> Edit Profile Settings
                     </Link>
                 ) : (
-                    <button
-                        className="btn btn-sm btn-outline-secondary action-btn"
-                        onClick={() => profile && this.follow(!profile.following)}
-                        disabled={following}
-                    >
-                        <i className="ion-plus-round"/>
-                        &nbsp;
-                        {profile && profile.following ? "Unfollow" : "Follow"} {username}
-                    </button>
+                    <FollowButton
+                        className="action-btn"
+                        username={username}
+                        following={profile && profile.following}
+                        onChange={(following) => this.setState({profile: {...profile, following}})}
+                    />
                 )}
             </Fragment>
         );

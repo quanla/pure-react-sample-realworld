@@ -44,6 +44,7 @@ export class ArticleRoute extends RComponent {
 
                                     <ArticleMeta
                                         article={article}
+                                        onChange={(article) => this.setState({article})}
                                     />
                                 </Fragment>
                             )}
