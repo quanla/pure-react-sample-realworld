@@ -64,6 +64,7 @@ const renderRoutes = (user) => {
 
                 <Route exact path="/settings" component={requireAuthen(SettingsRoute)}/>
                 <Route exact path="/editor/" component={requireAuthen(EditorRoute)}/>
+                <Route exact path="/editor/:slug" component={requireAuthen(EditorRoute)}/>
             </Switch>
         </HashRouter>
     );

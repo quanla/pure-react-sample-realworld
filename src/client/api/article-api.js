@@ -23,6 +23,12 @@ const articleApi = {
     createArticle(article) {
         return fetcher.post(`/articles`, {article});
     },
+    updateArticle(article) {
+        return fetcher.put(`/articles/${article.slug}`, {article});
+    },
+    deleteArticle(articleSlug) {
+        return fetcher.delete(`/articles/${articleSlug}`);
+    },
     getComments(articleSlug) {
         return fetcher.get(`/articles/${articleSlug}/comments`).then(({comments}) => comments);
     },

@@ -23,8 +23,8 @@ export class TagListInput extends RComponent {
                        }}
                 />
                 <div className="tag-list">
-                    {value && value.map((tag) => (
-                        <span className="tag-default tag-pill">
+                    {value && value.map((tag, i) => (
+                        <span className="tag-default tag-pill" key={i}>
                             <i
                                 className="ion-close-round"
                                 onClick={() => onChange(Cols.remove1(value, tag))}

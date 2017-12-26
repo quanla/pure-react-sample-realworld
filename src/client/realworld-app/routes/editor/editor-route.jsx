@@ -15,17 +15,25 @@ export class EditorRoute extends RComponent {
         super(props, context);
 
         this.state = {
-            article: {},
+            article: null,
             errors: null,
         };
+
+        if (props.match.params.slug) {
+            articleApi.getArticle(props.match.params.slug).then((article) => this.setState({article}));
+        } else {
+            this.state.article = {};
+        }
     }
 
     doSubmit() {
         const {history} = this.props;
         const {article} = this.state;
 
+        const {slug} = this.props.match.params;
+
         this.setState({submitting: true});
-        articleApi.createArticle(article).then(({errors, article}) => {
+        (slug ? articleApi.updateArticle(article) : articleApi.createArticle(article)).then(({errors, article}) => {
             if (errors) {
                 this.setState({submitting: false, errors});
             } else {

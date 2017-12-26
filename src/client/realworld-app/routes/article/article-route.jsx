@@ -2,7 +2,6 @@ import classnames from "classnames";
 import {RComponent} from "../../../common/r-component";
 import {Layout} from "../layout/layout";
 import {articleApi} from "../../../api/article-api";
-import {Link} from "react-router-dom";
 import {Fragment} from "react";
 import {LoadingPanel} from "../../../common/loading-panel/loading-panel";
 import {CommentsBox} from "./comments-box/comments-box";
@@ -45,6 +44,7 @@ export class ArticleRoute extends RComponent {
                                     <ArticleMeta
                                         article={article}
                                         onChange={(article) => this.setState({article})}
+                                        onDeleted={() => history.push("/")}
                                     />
                                 </Fragment>
                             )}
