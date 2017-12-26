@@ -15,6 +15,7 @@ export class Pagination extends RComponent {
                             className={classnames("page-item", {
                                 active: i == current
                             })}
+                            key={i}
                         >
                             <a
                                 className="page-link"

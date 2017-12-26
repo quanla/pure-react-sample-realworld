@@ -31,8 +31,8 @@ export class ArticleList extends RComponent {
                         No articles are here... yet.
                     </div>
                 ) : (
-                    articles.map((article) => (
-                        <div className="article-preview">
+                    articles.map((article, i) => (
+                        <div className="article-preview" key={i}>
                             <div className="article-meta">
                                 <Link to={`/@${article.author.username}`}><img src={article.author.image} /></Link>
                                 <div className="info">
@@ -58,8 +58,11 @@ export class ArticleList extends RComponent {
                                 <span>Read more...</span>
 
                                 <ul className="tag-list">
-                                    {article.tagList && article.tagList.map((tag) => (
-                                        <li className="tag-default tag-pill tag-outline">
+                                    {article.tagList && article.tagList.map((tag, i) => (
+                                        <li
+                                            className="tag-default tag-pill tag-outline"
+                                            key={i}
+                                        >
                                             {tag}
                                         </li>
                                     ))}

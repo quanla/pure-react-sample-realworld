@@ -30,7 +30,7 @@ export class TabsPanel extends RComponent {
                     <ul className="nav nav-pills outline-active">
                         {tabs.map((tab, i) =>
                             !!tab && (
-                                <li className="nav-item">
+                                <li className="nav-item" key={i}>
                                     <a
                                         className={`nav-link ${selectedIndex == i && "active"}`}
                                         href=""

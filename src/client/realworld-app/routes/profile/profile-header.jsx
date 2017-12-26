@@ -44,7 +44,7 @@ export class ProfileHeader extends RComponent {
                     </Fragment>
                 )}
                 {user && username == user.username ? (
-                    <Link to="/settings" class="btn btn-sm btn-outline-secondary action-btn">
+                    <Link to="/settings" className="btn btn-sm btn-outline-secondary action-btn">
                         <i className="ion-gear-a"/> Edit Profile Settings
                     </Link>
                 ) : (

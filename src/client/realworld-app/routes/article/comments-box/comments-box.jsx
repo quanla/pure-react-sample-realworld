@@ -33,8 +33,8 @@ export class CommentsBox extends RComponent {
                 {comments==null ? (
                     <LoadingPanel text="Loading comments"/>
                 ) : (
-                    comments.map((comment) => (
-                        <div className="card">
+                    comments.map((comment, i) => (
+                        <div className="card" key={i}>
                             <div className="card-block">
                                 <p className="card-text">{comment.body}</p>
                             </div>

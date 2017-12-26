@@ -63,8 +63,8 @@ export class ArticleRoute extends RComponent {
                                         <MarkDown value={article.body}/>
 
                                         <ul className="tag-list">
-                                            {article.tagList && article.tagList.map((tag) => (
-                                                <li className="tag-default tag-pill tag-outline">
+                                            {article.tagList && article.tagList.map((tag, i) => (
+                                                <li className="tag-default tag-pill tag-outline" key={i}>
                                                     {tag}
                                                 </li>
                                             ))}

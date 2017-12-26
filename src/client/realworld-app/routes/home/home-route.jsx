@@ -70,13 +70,14 @@ export class HomeRoute extends RComponent {
                                         {tags == null ? (
                                             <LoadingPanel/>
                                         ) : (
-                                            tags.map((tag) => (
+                                            tags.map((tag, i) => (
                                                 <a
                                                     href="" className="tag-pill tag-default"
                                                     onClick={(e) => {
                                                         e.preventDefault();
                                                         this.setState({showTag: tag});
                                                     }}
+                                                    key={i}
                                                 >{tag}</a>
                                             ))
                                         )}
